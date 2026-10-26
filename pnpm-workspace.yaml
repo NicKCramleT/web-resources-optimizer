@@ -1,0 +1,12 @@
+# Paquetes autorizados a ejecutar scripts de instalación:
+# - ffmpeg-static descarga el binario de ffmpeg para tu plataforma.
+# - @ffprobe-installer/* solo marca su binario de ffprobe como ejecutable.
+# - esbuild instala su binario nativo (lo usa tsx para `pnpm web`).
+allowBuilds:
+  ffmpeg-static: true
+  esbuild: true
+  '@ffprobe-installer/darwin-arm64': true
+  '@ffprobe-installer/darwin-x64': true
+  '@ffprobe-installer/linux-x64': true
+  '@ffprobe-installer/linux-arm64': true
+  '@ffprobe-installer/win32-x64': true

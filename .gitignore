@@ -1,0 +1,12 @@
+node_modules/
+dist/
+coverage/
+.omc/
+.DS_Store
+*.log
+
+# Carpetas de trabajo: se versiona solo la estructura, no los archivos
+input/*
+!input/.gitkeep
+export/*
+!export/.gitkeep

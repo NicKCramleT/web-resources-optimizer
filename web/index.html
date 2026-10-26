@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mesa de luz · Optimizador</title>
+  <meta name="description" content="Optimiza fotos y videos para la web en tu propio computador.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Caveat+Brush&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3' y='3' width='26' height='26' rx='4' fill='%23FBFCFD'/%3E%3Crect x='9' y='9' width='14' height='14' fill='%2398B4C4'/%3E%3Cpath d='M6 26 26 6' stroke='%23D93A2B' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+</head>
+<body>
+  <header class="masthead">
+    <div class="brand">
+      <h1>Mesa de luz</h1>
+      <p>Tus fotos y videos, listos para la web. Todo se procesa en este computador.</p>
+    </div>
+
+    <form class="settings" id="settings" aria-label="Ajustes">
+      <fieldset class="segmented">
+        <legend>Calidad</legend>
+        <label><input type="radio" name="preset" value="small"><span>Liviana</span></label>
+        <label><input type="radio" name="preset" value="balanced" checked><span>Equilibrada</span></label>
+        <label><input type="radio" name="preset" value="high"><span>Alta</span></label>
+      </fieldset>
+      <fieldset class="segmented">
+        <legend>Imágenes</legend>
+        <label title="Prueba AVIF y WebP y se queda con el más liviano"><input type="radio" name="imageFormat" value="auto" checked><span>Lo más liviano</span></label>
+        <label><input type="radio" name="imageFormat" value="webp"><span>WebP</span></label>
+        <label><input type="radio" name="imageFormat" value="jpeg"><span>JPG</span></label>
+      </fieldset>
+      <fieldset class="segmented">
+        <legend>Videos</legend>
+        <label title="H.264: se reproduce en cualquier dispositivo"><input type="radio" name="videoCodec" value="h264" checked><span>MP4</span></label>
+        <label title="AV1: hasta 50 % más liviano, tarda más"><input type="radio" name="videoCodec" value="av1"><span>AV1</span></label>
+        <label class="toggle"><input type="checkbox" name="muteVideo"><span>Sin audio</span></label>
+      </fieldset>
+    </form>
+  </header>
+
+  <main>
+    <section class="table" id="table" aria-label="Archivos">
+      <div class="table__empty" id="empty">
+        <p class="table__prompt">Suelta aquí tus fotos y videos</p>
+        <p class="table__hint">JPG, PNG, HEIC del iPhone, GIF, TIFF, SVG, MOV, MP4 y más</p>
+        <button type="button" class="button button--light" data-action="pick">Elegir archivos</button>
+      </div>
+      <ul class="slides" id="slides"></ul>
+      <input type="file" id="picker" multiple hidden
+        accept="image/*,video/*,.heic,.heif,.mov,.mkv,.avi,.svg">
+    </section>
+  </main>
+
+  <footer class="tray" id="tray" hidden>
+    <div class="tray__summary">
+      <p class="tray__headline" id="trayHeadline"></p>
+      <p class="tray__detail" id="trayDetail"></p>
+      <div class="meter" id="meter" role="progressbar" aria-label="Avance total" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span></span></div>
+    </div>
+    <div class="tray__actions" id="trayActions"></div>
+  </footer>
+
+  <p class="visually-hidden" id="announcer" aria-live="polite"></p>
+
+  <dialog class="loupe" id="loupe" aria-labelledby="loupeTitle">
+    <div class="loupe__frame" id="loupeFrame"></div>
+    <aside class="loupe__info" id="loupeInfo"></aside>
+    <button type="button" class="loupe__close" data-action="close-loupe" aria-label="Cerrar">×</button>
+  </dialog>
+
+  <template id="slideTemplate">
+    <li class="slide" data-status="selected">
+      <button type="button" class="slide__mount" aria-label="">
+        <span class="slide__window">
+          <span class="slide__placeholder"></span>
+          <span class="slide__sweep" aria-hidden="true"></span>
+        </span>
+        <span class="slide__label">
+          <span class="slide__name"></span>
+          <span class="slide__meta"></span>
+        </span>
+        <span class="slide__bar" aria-hidden="true"><span></span></span>
+      </button>
+      <span class="slide__mark" aria-hidden="true">
+        <svg viewBox="0 0 120 60" preserveAspectRatio="none"><path d="M10 34 C 6 12, 60 4, 104 14 C 122 20, 114 46, 70 52 C 34 56, 4 48, 14 26" /></svg>
+        <span class="slide__mark-text"></span>
+      </span>
+      <button type="button" class="slide__remove" aria-label="Quitar">×</button>
+    </li>
+  </template>
+
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

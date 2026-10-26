@@ -1,0 +1,61 @@
+{
+  "name": "web-resources-optimizer",
+  "version": "1.0.0",
+  "description": "Optimiza imágenes (incl. HEIC de iPhone), GIFs, SVG y videos para la web.",
+  "scripts": {
+    "web": "tsx src/server/index.ts",
+    "start": "node dist/server/index.js",
+    "optimize": "tsx src/cli.ts",
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NicKCramleT/web-resources-optimizer.git"
+  },
+  "license": "MIT",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/NicKCramleT/web-resources-optimizer/issues"
+  },
+  "homepage": "https://github.com/NicKCramleT/web-resources-optimizer#readme",
+  "dependencies": {
+    "@ffprobe-installer/ffprobe": "^2.1.2",
+    "archiver": "^8.0.0",
+    "commander": "^15.0.0",
+    "ffmpeg-static": "^5.3.0",
+    "heic-decode": "^2.1.0",
+    "p-limit": "^7.3.3",
+    "sharp": "^0.35.5",
+    "svgo": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/archiver": "^8.0.0",
+    "@types/node": "^26.6.5",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.5"
+  },
+  "bin": {
+    "web-optimize": "dist/cli.js"
+  },
+  "engines": {
+    "node": ">=22.12"
+  },
+  "keywords": [
+    "image",
+    "optimization",
+    "webp",
+    "avif",
+    "heic",
+    "ffmpeg",
+    "cli"
+  ],
+  "files": [
+    "dist",
+    "web"
+  ],
+  "packageManager": "pnpm@12.11.2"
+}
